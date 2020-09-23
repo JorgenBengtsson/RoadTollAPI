@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RoadTollAPI.Context;
 
 namespace RoadTollAPI.Migrations
 {
     [DbContext(typeof(RoadTollAPIDBContext))]
-    partial class RoadTollAPIDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200923215141_AddCarEntity")]
+    partial class AddCarEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

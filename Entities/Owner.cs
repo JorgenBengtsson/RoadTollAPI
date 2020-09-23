@@ -9,5 +9,7 @@ namespace RoadTollAPI.Entities
     {
         public int id { set; get; }
         public string name { get; set; }
+
+        public virtual Car car { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RoadTollAPI.Context;
 using RoadTollAPI.Entities;
 
@@ -20,7 +21,7 @@ namespace RoadTollAPI.Controllers
         {
             using(var context = new RoadTollAPIDBContext())
             {
-                return context.Owners.ToArray<Owner>();
+                return context.Owners.Include(o => o.car).ToArray<Owner>();
             }
         }
 
