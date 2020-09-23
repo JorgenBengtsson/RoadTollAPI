@@ -7,6 +7,7 @@ namespace RoadTollAPI.Context
     public class RoadTollAPIDBContext : DbContext
     {
         public DbSet<Owner> Owners { set; get; }
+        public DbSet<Car> Cars { set; get; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
