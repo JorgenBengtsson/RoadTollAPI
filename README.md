@@ -19,4 +19,13 @@ PM> update-database -verbose
 ###### Add Car entity
 Adds the Car entity and connects it with Owner using a one-to-one relationship. Changes is made to the RoadTollAPIDBContext to configure the relationship using the Fluent API.
 Owner needs to have a property that "points" to a Car. And Car both "point out" the Owner and has a foreign key.
+
+Also make changes to the Owners Controller to return a owners Car.
+
 Read more about this [here](https://www.entityframeworktutorial.net/efcore/configure-one-to-one-relationship-using-fluent-api-in-ef-core.aspx)
+
+###### Add Day entity
+Adds the Day entity that has a many-to-many relationship with Car. A connection table is needed, the DayCar entity.
+
+Read more about this [here](https://www.entityframeworktutorial.net/efcore/configure-many-to-many-relationship-in-ef-core.aspx)
+
