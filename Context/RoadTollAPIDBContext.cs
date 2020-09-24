@@ -12,10 +12,12 @@ namespace RoadTollAPI.Context
         public DbSet<Day> Days { set; get; }
         public DbSet<DayCar> DayCars { set; get; }
 
+        public RoadTollAPIDBContext(DbContextOptions<RoadTollAPIDBContext> options) : base(options)
+        {
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // The database connection, the simple but bad way to include it
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=RoadTollAPI;Trusted_Connection=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

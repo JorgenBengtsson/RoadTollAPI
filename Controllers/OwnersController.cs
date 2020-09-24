@@ -15,39 +15,37 @@ namespace RoadTollAPI.Controllers
     [ApiController]
     public class OwnersController : ControllerBase
     {
+        private readonly RoadTollAPIDBContext _context;
+
+        public OwnersController(RoadTollAPIDBContext context)
+        {
+            _context = context;
+        }
+
         // GET: api/<OwnersController>
         [HttpGet]
         public IEnumerable<Owner> Get()
         {
-            using(var context = new RoadTollAPIDBContext())
-            {
-                return context.Owners.Include(o => o.car).ToArray<Owner>();
-            }
+            return _context.Owners.Include(o => o.car).ToArray<Owner>();
         }
 
         // GET api/<OwnersController>/5
         [HttpGet("{id}")]
         public Owner Get(int id)
         {
-            using (var context = new RoadTollAPIDBContext())
-            {
-                var owner = context.Owners.Where(o => o.id == id).FirstOrDefault();
-                if (owner != null)
-                    return owner;
-                else
-                    return null;
-            }
+            var owner = _context.Owners.Where(o => o.id == id).FirstOrDefault();
+            if (owner != null)
+                return owner;
+            else
+                return null;
         }
 
         // POST api/<OwnersController>
         [HttpPost]
         public void Post([FromBody] Owner owner)
         {
-            using (var context = new RoadTollAPIDBContext())
-            {
-                context.Owners.Add(owner);
-                context.SaveChanges();
-            }
+            _context.Owners.Add(owner);
+            _context.SaveChanges();
         }
 
 
@@ -55,13 +53,10 @@ namespace RoadTollAPI.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            using (var context = new RoadTollAPIDBContext())
-            {
-                var owner = new Owner { id = id };
-                context.Owners.Attach(owner);
-                context.Owners.Remove(owner);
-                context.SaveChanges();
-            }
+            var owner = new Owner { id = id };
+            _context.Owners.Attach(owner);
+            _context.Owners.Remove(owner);
+            _context.SaveChanges();
         }
     }
 }
