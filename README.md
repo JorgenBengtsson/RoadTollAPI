@@ -16,3 +16,7 @@ In order to create the database, don't forget
 ```
 PM> update-database -verbose
 ```
+###### Add Car entity
+Adds the Car entity and connects it with Owner using a one-to-one relationship. Changes is made to the RoadTollAPIDBContext to configure the relationship using the Fluent API.
+Owner needs to have a property that "points" to a Car. And Car both "point out" the Owner and has a foreign key.
+Read more about this [here](https://www.entityframeworktutorial.net/efcore/configure-one-to-one-relationship-using-fluent-api-in-ef-core.aspx)
