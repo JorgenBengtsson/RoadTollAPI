@@ -6,20 +6,30 @@ namespace RoadTollAPI.Context
 {
     public class RoadTollAPIDBContext : DbContext
     {
+        // All entities need to be "listed" here or the Entity Framework don't "know" about them
         public DbSet<Owner> Owners { set; get; }
         public DbSet<Car> Cars { set; get; }
+        public DbSet<Day> Days { set; get; }
+        public DbSet<DayCar> DayCars { set; get; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            // The database connection, the simple but bad way to include it
             optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=RoadTollAPI;Trusted_Connection=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configuring the relationship using Fluent API
+
+            // Configuring the one-to-one relationship between tables Car and Owner
             modelBuilder.Entity<Owner>()
                 .HasOne<Car>(o => o.car)
                 .WithOne(c => c.owner)
                 .HasForeignKey<Car>(c => c.CarOfOwnerId);
+
+            // Composite Primary Key for joining the tables Car and Day with a many-to-many relationship
+            modelBuilder.Entity<DayCar>().HasKey(sc => new { sc.dayId, sc.carId });
         }
     }
 }
