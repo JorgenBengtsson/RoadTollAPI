@@ -50,6 +50,17 @@ namespace RoadTollAPI.Controllers
             _context.SaveChanges();
         }
 
+        [HttpPut("{id}")]
+        public void Update(int id, [FromBody] Owner owner)
+        {
+            var o = _context.Owners.SingleOrDefault(o => o.id == id);
+            
+            o.name = owner.name;
+            o.age = owner.age;
+            o.adress = owner.adress;
+
+            _context.SaveChanges();
+        }
 
         // DELETE api/<OwnersController>/5
         [HttpDelete("{id}")]
